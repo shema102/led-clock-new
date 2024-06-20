@@ -1,13 +1,6 @@
 #include <Arduino.h>
-#include <FastLED.h>
 
-#include "rtcTime.h"
-
-const int NUM_LEDS = 4 * 7 * 2 + 2; // 4 numbers of 7 segments, each segment has 2 leds, plus 2 dots
-CRGB leds[NUM_LEDS];
-
-void drawAllRed();
-void drawAllBlue();
+#include "rtc/rtcTime.h"
 
 void setup() {
     Serial.begin(9600);
@@ -27,7 +20,6 @@ void setup() {
         Serial.println("Time set");
     }
 
-    FastLED.addLeds<NEOPIXEL, 14>(leds, NUM_LEDS);
 }
 
 void loop() {
@@ -46,25 +38,5 @@ void loop() {
     Serial.print(now.second(), DEC);
     Serial.println();
 
-    drawAllRed();
-
     delay(20);
-
-    drawAllBlue();
-
-    delay(20);
-}
-
-void drawAllRed() {
-    for (auto & led : leds) {
-        led = CRGB::Red;
-    }
-    FastLED.show();
-}
-
-void drawAllBlue() {
-    for (auto & led : leds) {
-        led = CRGB::Blue;
-    }
-    FastLED.show();
 }

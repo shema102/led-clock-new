@@ -1,0 +1,10 @@
+#ifndef LED_CLOCK_NEW_TIMEPAINTER_H
+#define LED_CLOCK_NEW_TIMEPAINTER_H
+
+
+class TimePainter {
+
+};
+
+
+#endif //LED_CLOCK_NEW_TIMEPAINTER_H
