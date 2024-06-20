@@ -1,6 +1,9 @@
 #include <Arduino.h>
+#include <led/TimeLedController.h>
 
 #include "rtc/rtcTime.h"
+
+TimeLedController timeLedController{};
 
 void setup() {
     Serial.begin(9600);
@@ -38,5 +41,7 @@ void loop() {
     Serial.print(now.second(), DEC);
     Serial.println();
 
-    delay(20);
+    timeLedController.drawTime(now.hour(), now.minute(), now.second());
+
+    delay(1000);
 }
