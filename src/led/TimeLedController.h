@@ -26,7 +26,6 @@ enum class DigitSegments: uint8_t;
  * Each segment has 2 leds.
  *
  */
-
 class TimeLedController {
     static constexpr int NUM_LEDS = 4 * 7 * 2 + 2; // 4 numbers of 7 segments, each segment has 2 leds, plus 2 dots
     CRGB leds[NUM_LEDS]{};

@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <led/TimeLedController.h>
 
-#include "rtc/rtcTime.h"
+#include "rtc/RTCManager.h"
 #include "settings/SettingsManager.h"
 
 TimeLedController timeLedController{};
@@ -9,25 +9,10 @@ TimeLedController timeLedController{};
 void setup() {
     Serial.begin(9600);
     Serial.println("Starting...");
-
-    if (!setupTime()) {
-        Serial.println("Couldn't find RTC");
-    } else {
-        Serial.println("RTC found");
-    }
-
-    DateTime now = DateTime(F(__DATE__), F(__TIME__));
-
-    if (!setCurrentTime(now)) {
-        Serial.println("Couldn't set time");
-    } else {
-        Serial.println("Time set");
-    }
-
 }
 
 void loop() {
-    DateTime now = getCurrentTime();
+    DateTime now = RTCManager::getInstance().getTime();
 
     Serial.print(now.hour(), DEC);
     Serial.print(':');

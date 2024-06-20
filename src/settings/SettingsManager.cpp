@@ -55,7 +55,7 @@ void SettingsManager::saveBrightness(uint8_t brightness) {
     saveSettings();
 }
 
-bool SettingsManager::isDotsEnabled() const {
+bool SettingsManager::isDotEnabled() const {
     return !(currentSettings.settings_flags & 0x01);
 }
 

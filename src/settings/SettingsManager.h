@@ -17,25 +17,25 @@ struct Settings {
     uint8_t settings_flags; // bit 0 - disable dots, bit 1 - 7 reserved for future use
 };
 
+constexpr uint16_t MAGIC_NUMBER = 0x1234;
+
+constexpr Settings DEFAULT_SETTINGS = {
+        .magic_number = MAGIC_NUMBER,
+        .brightness = 255,
+        .color_r = 255,
+        .color_g = 255,
+        .color_b = 255,
+        .animation_type = 0,
+        .settings_flags = 0
+};
+
 class SettingsManager {
     static constexpr int EEPROM_SIZE = sizeof(Settings);
     static constexpr int EEPROM_ADDRESS = 0;
-    static constexpr uint16_t MAGIC_NUMBER = 0x1234;
-    constexpr static const Settings DEFAULT_SETTINGS = {
-            .magic_number = MAGIC_NUMBER,
-            .brightness = 255,
-            .color_r = 255,
-            .color_g = 255,
-            .color_b = 255,
-            .animation_type = 0,
-            .settings_flags = 0
-    };
 
     Settings currentSettings{};
 
     void saveSettings() const;
-
-    static SettingsManager instance;
 
     SettingsManager();
 
@@ -56,7 +56,7 @@ public:
 
     void saveBrightness(uint8_t brightness);
 
-    bool isDotsEnabled() const;
+    bool isDotEnabled() const;
 
     void setDotsEnabled(bool enabled);
 
