@@ -33,7 +33,7 @@ class TimeLedController {
 
     CRGB currentColor = CRGB::Red;
 
-    uint8_t brightness = 255;
+    uint8_t currentBrightness = 255;
 
     void setSegmentDigit(uint8_t number, uint8_t digit);
 

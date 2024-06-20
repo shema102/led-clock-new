@@ -26,17 +26,9 @@ void setup() {
 
 }
 
-uint8_t someValue = 0;
-
 void loop() {
     DateTime now = getCurrentTime();
 
-    Serial.print(now.year(), DEC);
-    Serial.print('/');
-    Serial.print(now.month(), DEC);
-    Serial.print('/');
-    Serial.print(now.day(), DEC);
-    Serial.print(" ");
     Serial.print(now.hour(), DEC);
     Serial.print(':');
     Serial.print(now.minute(), DEC);
@@ -48,13 +40,6 @@ void loop() {
     timeLedController.setColor(currentColor);
 
     timeLedController.drawTime(now.hour(), now.minute(), now.second());
-
-    someValue = (someValue + 5) % 255;
-
-    if (someValue > 100) {
-        timeLedController.setColor(CRGB::Gold);
-        SettingsManager::getInstance().saveColor(CRGB::Gold);
-    }
 
     delay(1000);
 }

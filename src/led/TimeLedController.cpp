@@ -1,24 +1,24 @@
 #include "TimeLedController.h"
 
-// least significant bit is A
+// least significant bit is A segment
 enum class DigitSegments: uint8_t
 {
-    zero  = 0b01111110,
-    one   = 0b01000010,
-    two   = 0b00110111,
-    three = 0b01100111,
-    four  = 0b01001011,
-    five  = 0b01101101,
-    six   = 0b01111101,
-    seven = 0b01000110,
-    eight = 0b01111111,
-    nine  = 0b01101111,
+    zero    = 0b01111110,
+    one     = 0b01000010,
+    two     = 0b00110111,
+    three   = 0b01100111,
+    four    = 0b01001011,
+    five    = 0b01101101,
+    six     = 0b01111101,
+    seven   = 0b01000110,
+    eight   = 0b01111111,
+    nine    = 0b01101111,
     nothing = 0b00000000
 };
 
 TimeLedController::TimeLedController()
 {
-    FastLED.addLeds<NEOPIXEL, 14>(leds, NUM_LEDS);
+    CFastLED::addLeds<NEOPIXEL, 14>(leds, NUM_LEDS);
 }
 
 void TimeLedController::drawTime(const uint8_t hour, const uint8_t minute, const uint8_t second)
@@ -37,7 +37,7 @@ void TimeLedController::setColor(const CRGB color)
 
 void TimeLedController::setBrightness(uint8_t brightness)
 {
-    this->brightness = brightness;
+    this->currentBrightness = brightness;
 }
 
 void TimeLedController::DEBUG_drawNumber(const uint8_t number)
@@ -74,12 +74,12 @@ void TimeLedController::setDot(const bool enabled)
     leds[4 * 7 * 2] = enabled ? this->currentColor : CRGB::Black;
 }
 
-// return color with brightness
+// return color with currentBrightness
 CRGB TimeLedController::colorForBrightness()
 {
     CRGB color = this->currentColor;
 
-    color.subtractFromRGB(225 - brightness);
+//    color.subtractFromRGB(225 - currentBrightness);
 
     return color;
 }
