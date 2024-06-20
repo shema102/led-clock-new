@@ -33,11 +33,15 @@ class TimeLedController {
 
     CRGB currentColor = CRGB::Red;
 
+    uint8_t brightness = 255;
+
     void setSegmentDigit(uint8_t number, uint8_t digit);
 
     void setHours(uint8_t hour);
     void setMinutes(uint8_t minute);
     void setDot(bool enabled);
+
+    CRGB colorForBrightness();
 
     static DigitSegments getSegmentForNumber(uint8_t number);
 
@@ -45,6 +49,8 @@ public:
     void drawTime(uint8_t hour, uint8_t minute, uint8_t second);
 
     void setColor(CRGB color);
+
+    void setBrightness(uint8_t brightness);
 
     void DEBUG_drawNumber(uint8_t number);
 

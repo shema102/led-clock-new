@@ -2,6 +2,7 @@
 #include <led/TimeLedController.h>
 
 #include "rtc/rtcTime.h"
+#include "settings/SettingsManager.h"
 
 TimeLedController timeLedController{};
 
@@ -25,6 +26,8 @@ void setup() {
 
 }
 
+uint8_t someValue = 0;
+
 void loop() {
     DateTime now = getCurrentTime();
 
@@ -41,7 +44,17 @@ void loop() {
     Serial.print(now.second(), DEC);
     Serial.println();
 
+    const CRGB currentColor = SettingsManager::getInstance().getColor();
+    timeLedController.setColor(currentColor);
+
     timeLedController.drawTime(now.hour(), now.minute(), now.second());
+
+    someValue = (someValue + 5) % 255;
+
+    if (someValue > 100) {
+        timeLedController.setColor(CRGB::Gold);
+        SettingsManager::getInstance().saveColor(CRGB::Gold);
+    }
 
     delay(1000);
 }
